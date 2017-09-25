@@ -125,6 +125,9 @@ public class Kantor extends Container {
                     lastSellValues.put(currencyCode, calculatedSellValue);
                 }
             }
+        } catch (NullPointerException e) {
+            printToLog(e.toString());
+            printToLog("[Brak tabeli 'ex_table' na stronie]");
         } catch (Exception e) {
             printToLog(e.toString());
             printToLog("[Problem z przetworzeniem strony]");
