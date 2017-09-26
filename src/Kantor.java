@@ -5,13 +5,6 @@ import org.jsoup.select.Elements;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -106,7 +99,7 @@ public class Kantor extends Container {
                 String sellValue = cols.get(4).text();
                 double sValue = Double.parseDouble(sellValue);
                 String sellCentValue = String.format("%s", sValue);
-                double calculatedSellValue = calculateValue(sValue);
+                double calculatedSellValue = calculateValue(sValue, currencyCode);
                 String sellSuggestedValue = String.format("%s", calculatedSellValue);
                 if (panels.containsKey(currencyCode)) {
                     panels.get(currencyCode).updateValues(buyCentValue, sellCentValue, buySuggestedValue, sellSuggestedValue);
@@ -174,9 +167,9 @@ public class Kantor extends Container {
 
     }
 
-    private double calculateValue(double value) {
+    private double calculateValue(double value, String currCode) {
         if (value > 1.0) {
-            return round((value + 0.03) * 100.0) / 100.0;
+            return round((value + (currCode.equals("EUR") ? 0.02 : 0.03)) * 100.0) / 100.0;
         }
         if (value < 1.0 && value >= 0.05) {
             return ceil(value * 100.0) / 100.0;
