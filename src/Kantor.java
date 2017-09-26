@@ -39,6 +39,7 @@ public class Kantor extends Container {
         frame.setContentPane(this.Main);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.png")));
         frame.setVisible(true);
         currencies.setLayout(new GridLayout(0, 2, 5, 5));
         updateTime();
